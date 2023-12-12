@@ -22,11 +22,10 @@ public class UserController {
     @PostMapping("/login")
     public Result<String> login(@RequestBody User user) {
         User resultUser = userService.login(user.getNickname(), user.getPassword());
-        log.info(resultUser.toString());
-        String userString = JSONObject.toJSONString(resultUser);
-        if (userString.isEmpty()) {
+        if (resultUser == null) {
             return Result.error("用户名或密码错误！");
         }
+        String userString = JSONObject.toJSONString(resultUser);
         return Result.success(userString);
     }
 }
