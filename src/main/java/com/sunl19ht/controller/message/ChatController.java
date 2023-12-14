@@ -32,7 +32,7 @@ public class ChatController {
     @PostMapping("/send")
     public Result<String> login(@RequestBody Message message) {
         log.info(message.toString());
-        webSocketServer.sendToAllClient(message.getContent());
+        webSocketServer.sendToAllClient(message.getSender() + "说: " + message.getContent() );
         return Result.success();
     }
 }

@@ -28,4 +28,10 @@ public class UserController {
         String userString = JSONObject.toJSONString(resultUser);
         return Result.success(userString);
     }
+
+    @PostMapping("/register")
+    public Result register(@RequestBody User user) {
+        userService.register(user.getNickname(), user.getPassword());
+        return Result.success();
+    }
 }

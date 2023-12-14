@@ -7,4 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
 public interface UserMapper {
 
     User login(String nickname, String password);
+
+    void register(String nickname, String password);
 }
