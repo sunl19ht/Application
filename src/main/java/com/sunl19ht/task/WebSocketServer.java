@@ -1,5 +1,8 @@
 package com.sunl19ht.task;
 
+import com.sunl19ht.controller.user.UserStatus;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
@@ -14,6 +17,7 @@ import java.util.Map;
 /**
  * WebSocket服务
  */
+@Slf4j
 @Component
 @ServerEndpoint("/ws/{sid}")
 public class WebSocketServer {

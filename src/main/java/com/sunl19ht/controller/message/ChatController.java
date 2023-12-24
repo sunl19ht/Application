@@ -8,6 +8,7 @@ import com.sunl19ht.service.UserService;
 import com.sunl19ht.task.WebSocketServer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
@@ -28,7 +29,6 @@ public class ChatController {
 //    }
     @Autowired
     private WebSocketServer webSocketServer;
-
     @PostMapping("/send")
     public Result<String> login(@RequestBody Message message) {
         log.info(message.toString());

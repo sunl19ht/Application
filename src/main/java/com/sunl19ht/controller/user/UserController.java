@@ -19,13 +19,29 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UserStatus userStatus;
+
+    @PostMapping("close")
+    public Result close(@RequestBody User user) {
+        userStatus.setUserStatus(user.getNickname(), user.getStatus());
+        return Result.success();
+    }
+
     @PostMapping("/login")
     public Result<String> login(@RequestBody User user) {
-        User resultUser = userService.login(user.getNickname(), user.getPassword());
-        if (resultUser == null) {
-            return Result.error("用户名或密码错误！");
+        Integer status = userStatus.getUserStatus(user.getNickname());
+        String userString = null;
+        if (status == null || status == 0) {    //可以登录
+            User resultUser = userService.login(user.getNickname(), user.getPassword());
+            if (resultUser == null) {
+                return Result.error("用户名或密码错误！");
+            }
+            userStatus.setUserStatus(user.getNickname(), 1);
+            userString = JSONObject.toJSONString(resultUser);
+        } else {
+            return Result.error("当前用户已在线！");
         }
-        String userString = JSONObject.toJSONString(resultUser);
         return Result.success(userString);
     }
 
