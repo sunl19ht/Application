@@ -8,5 +8,5 @@ public class User {
     private String nickname;    //用户昵称
     private String password;    //用户密码
     private String createdAt;   //用户时间戳
-    private Integer status;
+    private Integer status; //在线状态
 }

@@ -31,7 +31,7 @@ public class UserController {
     @PostMapping("/login")
     public Result<String> login(@RequestBody User user) {
         Integer status = userStatus.getUserStatus(user.getNickname());
-        String userString = null;
+        String userString;
         if (status == null || status == 0) {    //可以登录
             User resultUser = userService.login(user.getNickname(), user.getPassword());
             if (resultUser == null) {
